@@ -115,7 +115,7 @@ def adjust_results4_isadog(results_dic, dogfile):
             # Classifier Label IS image of Dog (e.g. found in dognames_dic)
             # appends (0, 1)because only Classifier labe is a dog
             if results_dic[key][1] in dognames_dic:
-                results_dic[key].extend((1, 0))
+                results_dic[key].extend((0, 1))
             # Classifier Label IS NOT image of Dog (e.g. NOT in dognames_dic)
             # appends (0, 0) because both labels aren't dogs
             else:

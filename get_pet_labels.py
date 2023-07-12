@@ -1,28 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# */AIPND-revision/intropyproject-classify-pet-images/get_pet_labels.py
-#                                                                             
-# PROGRAMMER: Onyekachukwu Ejiofor Nweke
-# DATE CREATED: 8th July 2023                                 
-# REVISED DATE: 
-# PURPOSE: Create the function get_pet_labels that creates the pet labels from 
-#          the image's filename. This function inputs: 
-#           - The Image Folder as image_dir within get_pet_labels function and 
-#             as in_arg.dir for the function call within the main function. 
-#          This function creates and returns the results dictionary as results_dic
-#          within get_pet_labels function and as results within main. 
-#          The results_dic dictionary has a 'key' that's the image filename and
-#          a 'value' that's a list. This list will contain the following item
-#          at index 0 : pet image label (string).
-#
-##
-# Imports python modules
 from os import listdir
+import os.path
 
-# TODO 2: Define get_pet_labels function below please be certain to replace None
-#       in the return statement with results_dic dictionary that you create 
-#       with this function
-# 
 def get_pet_labels(image_dir):
     """
     Creates a dictionary of pet labels (results_dic) based upon the filenames 
@@ -40,41 +18,43 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
-    # Replace None with the results_dic dictionary that you created with this
-    # function
-    
-    
-    ## Retrieve the filenames from folder pet_images/
+    # Retrieve the filenames from the image directory
     filename_list = listdir(image_dir)
-    pet_labels = []
-    for pet_image in filename_list:
-        ## Sets string to lower case letters
-        low_pet_image = pet_image.lower()
-        ## Splits lower case string by _ to break into words 
-        word_list_pet_image = low_pet_image.split("_")
 
-        ## Create pet_name starting as empty string
-        pet_name = ""
+    # Create an empty dictionary named results_dic
+    results_dic = {}
 
-        ## Loops to check if word in pet name is only
-        ## alphabetic characters - if true append word
-        ## to pet_name separated by trailing space 
-        for word in word_list_pet_image:
-            if word.isalpha():
-                pet_name += word + " "
-            ## Strip off starting/trailing whitespace characters 
-        pet_name = pet_name.strip()
-        pet_labels.append(pet_name)
-            
-    ## Creates empty dictionary named results_dic
-    results_dic = dict()  
-    print(pet_labels)
-    for idx in range(0, len(filename_list), 1):
-        if filename_list[idx] not in results_dic:
-             results_dic[filename_list[idx]] = [pet_labels[idx]]
-        else:
-             print("** Warning: Key=", filename_list[idx], 
-                   "already exists in results_dic with value =", 
-                   results_dic[filename_list[idx]])
-    print(results_dic)
+    # Iterate through each filename
+    for filename in filename_list:
+        # Exclude hidden files starting with a dot
+        if not filename.startswith('.'):
+            # Set the file path
+            file_path = os.path.join(image_dir, filename)
+
+            # Check if the file is a regular file (not a directory or symlink)
+            if os.path.isfile(file_path):
+                # Convert filename to lowercase and remove file extension
+                pet_name = os.path.splitext(filename)[0].lower()
+
+                # Split the pet name by underscores to break into words
+                word_list_pet_name = pet_name.split('_')
+
+                # Create the pet label starting as an empty string
+                pet_label = ''
+
+                # Loop through each word in the pet name
+                for word in word_list_pet_name:
+                    # Check if the word consists of alphabetic characters only
+                    if word.isalpha():
+                        # Append the word to the pet label with a trailing space
+                        pet_label += word + ' '
+
+                # Strip leading/trailing whitespace characters from the pet label
+                pet_label = pet_label.strip()
+
+                # Add the pet label to the results_dic dictionary
+                results_dic[filename] = [pet_label]
+            else:
+                print(f"** Warning: '{filename}' is not a regular file.")
+
     return results_dic
