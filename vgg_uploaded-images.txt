@@ -1,0 +1,77 @@
+Command Line Arguments:
+     dir = uploaded_images/ 
+    arch = vgg 
+ dogfile = dognames.txt
+['coffe mug', 'dog', 'cat', 'dog']
+{'Coffe_mug_01.jpg': ['coffe mug'], 'Dog_01.jpg': ['dog'], 'cat_01.jpg': ['cat'], 'Dog_02.jpg': ['dog']}
+
+Pet Image Label Dictionary has 4 key-value pairs.
+Below are 4 of them:
+ 1 key:               Coffe_mug_01.jpg  label:                  coffe mug
+ 2 key:                     Dog_01.jpg  label:                        dog
+ 3 key:                     cat_01.jpg  label:                        cat
+ 4 key:                     Dog_02.jpg  label:                        dog
+
+     MATCH:
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier: german shepherd, german shepherd dog, german police dog, alsatian
+
+                    cat_01.jpg: 
+Real:                        cat   Classifier:          tabby, tabby cat, cat
+
+ NOT A MATCH:
+
+              Coffe_mug_01.jpg: 
+Real:                  coffe mug   Classifier:                    face powder
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier:             miniature pinscher
+
+# Total Images 4 # Matches: 2 # NOT Matches: 2
+
+     MATCH:
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier: german shepherd, german shepherd dog, german police dog, alsatian  
+PetLabelDog: 1  ClassLabelDog: 1
+
+                    cat_01.jpg: 
+Real:                        cat   Classifier:          tabby, tabby cat, cat  
+PetLabelDog: 0  ClassLabelDog: 0
+
+ NOT A MATCH:
+
+              Coffe_mug_01.jpg: 
+Real:                  coffe mug   Classifier:                    face powder  
+PetLabelDog: 0  ClassLabelDog: 0
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier:             miniature pinscher  
+PetLabelDog: 1  ClassLabelDog: 1
+
+# Total Images 4 # Matches: 2 # NOT Matches: 2
+
+ ** Statistics from calculates_results_stats() function:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:  50.0
+
+ ** Check Statistics - calculated from this function as a check:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:  50.0
+
+
+*** Results Summary for CNN Model Architecture VGG ***
+N Images            :   4
+N Dog Images        :   2
+N Not-Dog Images    :   2
+ 
+pct_match           : 50.0%
+pct_correct_dogs    : 100.0%
+pct_correct_breed   : 50.0%
+pct_correct_notdogs : 100.0%
+
+INCORRECT Dog Breed Assignment:
+Real:                        dog   Classifier:             miniature pinscher
+
+** Total Elapsed Runtime: 0:59:51
